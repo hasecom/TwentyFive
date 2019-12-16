@@ -16,6 +16,9 @@ body{
     position: relative;
     top:50%;
 }
+#ranking_wrap{
+    text-align: center;
+}
 ._block{
     position: relative;
     width:60px;

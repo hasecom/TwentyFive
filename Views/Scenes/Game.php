@@ -8,6 +8,7 @@
 </head>
 <body>
 <div id="app">
+    <h2 class="bg-light text-center">25</h2>
     <div id="timer">{{displayTimer}}</div>
     <div id="twentyfive">
         <div id="twentyfiveWrap">
@@ -41,6 +42,11 @@
             </div>
         </div>
     </div>
+    <div class="other mt-3">
+        <div id="ranking_wrap">
+            <button id="registRanking" class="btn btn-dark btn-outline-light">ランキングに登録</button>
+        </div>
+    </div>
 </div>
 </body>
 <script type="module">
@@ -64,8 +70,7 @@
                     $(this).css('color','rgba(0,0,0,0.4)');
                     //すべて押したら
                     if(this_.nextVal == this_.maxNum){
-                        console.log("koo")
-                        this_.stop();
+                        this_.finish();
                     }
                     this_.nextVal++;
                 }
@@ -73,6 +78,8 @@
         },
         methods:{
             mounteds(){
+                //ボタンを非活性
+                $('#registRanking').prop("disabled", true);
                 this.setNumber();
             },
             setNumber(){
@@ -118,6 +125,10 @@
             },
             stop(){
                 clearTimeout(this.timer);　
+            },
+            finish(){
+                this.stop();
+                $('#registRanking').prop("disabled", false);
             }
         }
      });
