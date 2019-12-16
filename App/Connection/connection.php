@@ -11,7 +11,7 @@ class Connection{
         $password = Configuration::get('DB_PASSWORD');
         self::$dbh = new PDO($dsn, $user, $password);
     }
-    public function con($sql,$param){
+    public function con($sql,$param = null){
         self::pdo();
         
         try {

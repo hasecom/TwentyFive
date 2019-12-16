@@ -46,7 +46,7 @@
         </div>
         <div class="other mt-3">
             <div id="ranking_wrap">
-                <button id="Ranking" class="btn btn-dark btn-outline-light">ランキングを見る</button>
+                <button id="Ranking" class="btn btn-dark btn-outline-light" @Click="SeeRanking()">ランキングを見る</button>
                 <button id="registRanking" class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#rankingModal">ランキングに登録</button>
             </div>
         </div>
@@ -61,7 +61,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="text-center">記録:{{result}}</div>
+                        <div id="result_time" class="text-center">記録:{{result}}秒</div>
                         <div class="form-group mb-3">
                             <label class="label" for="name">名前</label>
                             <input type="text" id="name" class="form-control" maxlength="15" placeholder="" aria-label="" aria-describedby="basic-addon1">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        <button type="button" class="btn btn-primary">登録</button>
+                        <button type="button" class="btn btn-primary" @click='registClick'>登録</button>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
             displayTimer:'0:00',
             nextVal:1,
             timer:'',
-            result:'記録なし'
+            result:'100000'
         },
         mounted(){
             this.mounteds();
@@ -107,7 +107,7 @@
         methods:{
             mounteds(){
                 //ボタンを非活性
-                //$('#registRanking').prop("disabled", true);
+                $('#registRanking').prop("disabled", true);
                 this.setNumber();
             },
             setNumber(){
@@ -158,6 +158,32 @@
                 this.stop();
                 $('#registRanking').prop("disabled", false);
                 this.result = this.displayTimer;
+            },
+            registClick(){
+                this.regist('request/ranking/registRanking');
+            },
+            regist(AjaxUrl){
+            axios.get(AjaxUrl,{
+                    params:{
+                    name: $('#name').val(),
+                    time:this.result
+                }
+            })
+              .then(res => {
+                  console.log(res)
+              })
+            },
+            SeeRanking(){
+                var AjaxUrl = 'request/ranking/getRanking'
+                axios.get(AjaxUrl,{
+                    params:{
+                    name: $('#name').val(),
+                    time:this.result
+                }
+                 })
+              .then(res => {
+                  console.log(res)
+              })
             }
         }
      });
