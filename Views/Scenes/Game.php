@@ -1,56 +1,83 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <?php require_once(__DIR__.'/../Components/Head.php'); ?>
+    <?php require_once(__DIR__ . '/../Components/Head.php'); ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>25 -twenty five-</title>
 </head>
+
 <body>
-<div id="app">
-    <h2 class="bg-light text-center">25</h2>
-    <div id="timer">{{displayTimer}}</div>
-    <div id="twentyfive">
-        <div id="twentyfiveWrap">
-            <div id="startBtn" @click="start">
-                <button class="btn btn-lg btn-info">スタート</button>
+    <div id="app">
+        <h2 class="bg-light text-center">25</h2>
+        <div id="timer">{{displayTimer}}</div>
+        <div id="twentyfive">
+            <div id="twentyfiveWrap">
+                <div id="startBtn" @click="start">
+                    <button class="btn btn-lg btn-info">スタート</button>
+                </div>
+            </div>
+            <div class="col_wrap">
+                <div class="d-inline-block _block _block_border" v-for="n in 5">
+                    <span :id="'block_'+Number(n)"></span>
+                </div>
+            </div>
+            <div class="col_wrap">
+                <div class="d-inline-block _block _block_border" v-for="n in 5">
+                    <span :id="'block_'+Number(n+5)"></span>
+                </div>
+            </div>
+            <div class="col_wrap">
+                <div class="d-inline-block _block _block_border" v-for="n in 5">
+                    <span :id="'block_'+Number(n+10)"></span>
+                </div>
+            </div>
+            <div class="col_wrap">
+                <div class="d-inline-block _block _block_border" v-for="n in 5">
+                    <span :id="'block_'+Number(n+15)"></span>
+                </div>
+            </div>
+            <div class="col_wrap">
+                <div class="d-inline-block _block _block_border" v-for="n in 5">
+                    <span :id="'block_'+Number(n+20)"></span>
+                </div>
             </div>
         </div>
-        <div class="col_wrap">
-            <div class="d-inline-block _block _block_border" v-for="n in 5">
-                <span :id="'block_'+Number(n)"></span>
+        <div class="other mt-3">
+            <div id="ranking_wrap">
+                <button id="Ranking" class="btn btn-dark btn-outline-light">ランキングを見る</button>
+                <button id="registRanking" class="btn btn-dark btn-outline-light" data-toggle="modal" data-target="#rankingModal">ランキングに登録</button>
             </div>
         </div>
-        <div class="col_wrap">
-            <div class="d-inline-block _block _block_border" v-for="n in 5" >
-                <span :id="'block_'+Number(n+5)"></span>
-            </div>
-        </div>
-        <div class="col_wrap">
-            <div class="d-inline-block _block _block_border" v-for="n in 5">
-                <span :id="'block_'+Number(n+10)"></span>
-            </div>
-        </div>
-        <div class="col_wrap">
-            <div class="d-inline-block _block _block_border" v-for="n in 5">
-                <span :id="'block_'+Number(n+15)"></span>
-            </div>
-        </div>
-        <div class="col_wrap">
-            <div class="d-inline-block _block _block_border" v-for="n in 5">
-                <span :id="'block_'+Number(n+20)"></span>
+        <!-- Modal -->
+        <div class="modal fade" id="rankingModal" tabindex="-1" role="dialog" aria-labelledby="rankingModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="rankingModalLabel">ランキングに登録</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">記録:{{result}}</div>
+                        <div class="form-group mb-3">
+                            <label class="label" for="name">名前</label>
+                            <input type="text" id="name" class="form-control" maxlength="15" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        <button type="button" class="btn btn-primary">登録</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="other mt-3">
-        <div id="ranking_wrap">
-            <button id="registRanking" class="btn btn-dark btn-outline-light">ランキングに登録</button>
-        </div>
-    </div>
-</div>
 </body>
 <script type="module">
- var app = new Vue({
+    var app = new Vue({
         el: "#app",
         data:{
             items:[],
@@ -58,7 +85,8 @@
             maxNum:25,
             displayTimer:'0:00',
             nextVal:1,
-            timer:''
+            timer:'',
+            result:'記録なし'
         },
         mounted(){
             this.mounteds();
@@ -79,7 +107,7 @@
         methods:{
             mounteds(){
                 //ボタンを非活性
-                $('#registRanking').prop("disabled", true);
+                //$('#registRanking').prop("disabled", true);
                 this.setNumber();
             },
             setNumber(){
@@ -129,8 +157,10 @@
             finish(){
                 this.stop();
                 $('#registRanking').prop("disabled", false);
+                this.result = this.displayTimer;
             }
         }
      });
 </script>
+
 </html>
