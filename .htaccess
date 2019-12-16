@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^request/ TwentyFive/Routes/web.php
+RewriteRule ^$ TwentyFive/Views/Scenes/Index.php
+RewriteRule ^game$ TwentyFive/Views/Scenes/Game.php
+RewriteRule ^ranking$ TwentyFive/Views/Scenes/Ranking.php
+</IfModule>

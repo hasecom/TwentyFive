@@ -1,0 +1,45 @@
+body{
+    background:#353b48;
+}
+#twentyfive{
+    position: relative;
+    text-align: center;
+}
+#twentyfiveWrap{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background: rgba(235,235,235,0.99);
+    z-index:100;
+}
+#startBtn{
+    position: relative;
+    top:50%;
+}
+._block{
+    position: relative;
+    width:60px;
+    height:60px;
+    background:#341f97;
+    font-size:25px;
+    font-weight: bold;
+    color:white;
+}
+._block_border{
+    border:1px solid white;
+}
+._block span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+.col_wrap{
+    width:100%;
+    height:60px;
+}
+#timer{
+    font-size:30px;
+    text-align: center;
+    color:white;
+}
