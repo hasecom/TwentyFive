@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>25 -twenty five-</title>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:url" content="http://25-twentyfive.site/" />
+    <meta property="og:title" content="25 -twenty five-" />
+    <meta property="og:description" content="1から順に番号を押していくシンプルゲームです。" />
+    <meta property="og:image" content="http://25-twentyfive.site/Views/Assets/images/25.png" />
 </head>
 
 <body>
@@ -104,6 +109,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="ads" class="mt-3">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35U7T3+70FVL6+3JZI+6RHFL" rel="nofollow">
+            <img border="0" width="200" height="200" alt="" src="https://www24.a8.net/svt/bgt?aid=191206407424&wid=004&eno=01&mid=s00000016587001136000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35U7T3+70FVL6+3JZI+6RHFL" alt="">
         </div>
     </div>
 </body>
