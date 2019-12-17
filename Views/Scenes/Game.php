@@ -51,6 +51,31 @@
             </div>
         </div>
         <!-- Modal -->
+        <div class="modal fade" id="seerankingModalScrollable" tabindex="-1" role="dialog" aria-labelledby="seerankingModalScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="seerankingModalScrollableTitle">ランキング</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div v-for="val,index in rank" :key='index' class="border my-1 py-3 px-3">
+                            <div>
+                                <span>{{index + 1}}位</span>
+                                <span class="px-2">{{val.user_name}}</span>
+                                <span>{{val.time}}</span>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
         <div class="modal fade" id="rankingModal" tabindex="-1" role="dialog" aria-labelledby="rankingModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -69,7 +94,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        <button type="button" class="btn btn-primary" @click='registClick'>登録</button>
+                        <button type="button" class="btn btn-primary" @click='registClick' data-dismiss="modal">登録</button>
                     </div>
                 </div>
             </div>
@@ -86,7 +111,8 @@
             displayTimer:'0:00',
             nextVal:1,
             timer:'',
-            result:'100000'
+            result:'記録なし',
+            rank:[]
         },
         mounted(){
             this.mounteds();
@@ -146,7 +172,7 @@
                     var min = Math.floor(this_.count/100/60);
                     var sec = Math.floor(this_.count/100);
                     var mSec = this_.count % 100;
-                    this_.displayTimer = sec + ':' + mSec
+                    this_.displayTimer = sec + '.' + mSec
                     this_.timer = setTimeout(countup, 10);
                 }
                 countup();
@@ -170,7 +196,7 @@
                 }
             })
               .then(res => {
-                  console.log(res)
+                  
               })
             },
             SeeRanking(){
@@ -182,7 +208,8 @@
                 }
                  })
               .then(res => {
-                  console.log(res)
+                  this.rank = res['data'];
+                  $('#seerankingModalScrollable').modal('show')
               })
             }
         }
