@@ -129,7 +129,7 @@
                     $(this).css('background','rgba(0,0,0,0.1)');
                     $(this).css('color','rgba(0,0,0,0.4)');
                     //すべて押したら
-                    if(this_.nextVal == 1 ){//this_.maxNum
+                    if(this_.nextVal == this_.maxNum ){//
                         this_.finish();
                     }
                     this_.nextVal++;
