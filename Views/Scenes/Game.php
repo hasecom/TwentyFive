@@ -76,7 +76,7 @@
                             <div>
                                 <span>{{index + 1}}位</span>
                                 <span class="px-2">{{val.user_name}}</span>
-                                <span>{{val.time}}</span>
+                                <span>{{val.time}}秒</span>
                             </div>
                         </div>
                     </div>
