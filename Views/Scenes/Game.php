@@ -18,6 +18,12 @@
                     <button class="btn btn-lg btn-info">スタート</button>
                 </div>
             </div>
+            <div id="retryWrap" class="d-none">
+                <div id="score">{{result}}秒</div>
+                <div id="retry">
+                    <button id="retry_btn" @click="retryClick()" class="btn btn-lg btn-info">リトライ</button>
+                </div>
+            </div>
             <div class="col_wrap">
                 <div class="d-inline-block _block _block_border" v-for="n in 5">
                     <span :id="'block_'+Number(n)"></span>
@@ -67,7 +73,7 @@
                                 <span class="px-2">{{val.user_name}}</span>
                                 <span>{{val.time}}</span>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -89,7 +95,7 @@
                         <div id="result_time" class="text-center">記録:{{result}}秒</div>
                         <div class="form-group mb-3">
                             <label class="label" for="name">名前</label>
-                            <input type="text" id="name" class="form-control" maxlength="15" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                            <input type="text" id="name" class="form-control" maxlength="10" placeholder="" aria-label="" aria-describedby="basic-addon1">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -123,7 +129,7 @@
                     $(this).css('background','rgba(0,0,0,0.1)');
                     $(this).css('color','rgba(0,0,0,0.4)');
                     //すべて押したら
-                    if(this_.nextVal == this_.maxNum){
+                    if(this_.nextVal == 1 ){//this_.maxNum
                         this_.finish();
                     }
                     this_.nextVal++;
@@ -183,20 +189,20 @@
             finish(){
                 this.stop();
                 $('#registRanking').prop("disabled", false);
+                $('#retryWrap').removeClass('d-none');
                 this.result = this.displayTimer;
             },
             registClick(){
                 this.regist('request/ranking/registRanking');
+                //ボタンを非活性
+                $('#registRanking').prop("disabled", true);
             },
             regist(AjaxUrl){
-            axios.get(AjaxUrl,{
-                    params:{
-                    name: $('#name').val(),
-                    time:this.result
-                }
-            })
+            let params = new URLSearchParams();
+            params.append('name', $('#name').val());
+            params.append('time', this.result);
+            axios.post(AjaxUrl,params)
               .then(res => {
-                  
               })
             },
             SeeRanking(){
@@ -211,6 +217,9 @@
                   this.rank = res['data'];
                   $('#seerankingModalScrollable').modal('show')
               })
+            },
+            retryClick(){
+                location.reload();
             }
         }
      });
