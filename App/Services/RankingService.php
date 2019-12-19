@@ -22,7 +22,7 @@ class RankingService{
     }
     public function getRanking(){
         $sql = null;
-        $sql.="SELECT * FROM ranking ORDER by time LIMIT 20 OFFSET 0";
+        $sql.="SELECT * FROM ranking ORDER by time LIMIT 100 OFFSET 0";
         $connection = new Connection();
         return $connection->con($sql);
         }
